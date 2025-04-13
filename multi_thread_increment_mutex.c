@@ -10,13 +10,15 @@ extern pthread_mutex_t lock;
 
 int main(){
     pthread_t threads[MAX_THREAD];
+    int threads_ids[MAX_THREAD];
 
     pthread_mutex_init(&lock, NULL);
 
     printf("Number before increment: %d\n", number);
 
     for(int i = 0; i < MAX_THREAD; i++){
-        pthread_create(&threads[i], NULL, thread_increment_mutex, &number);
+        threads_ids[i] = i;
+        pthread_create(&threads[i], NULL, thread_increment_mutex, &threads_ids[i]);
     }
 
     for(int i = 0; i < MAX_THREAD; i++){

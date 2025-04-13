@@ -8,11 +8,13 @@ extern int number;
 
 int main(){
     pthread_t threads[MAX_THREAD];
+    int threads_ids[MAX_THREAD];
 
     printf("Number before increment: %d\n", number);
 
     for(int i = 0; i < MAX_THREAD; i++){
-        pthread_create(&threads[i], NULL, thread_increment, &number);
+        threads_ids[i] = i;
+        pthread_create(&threads[i], NULL, thread_increment, &threads_ids[i]);
     }
 
     for(int i = 0; i < MAX_THREAD; i++){

@@ -9,23 +9,21 @@ pthread_mutex_t lock;
 sem_t sem;
 
 void* thread_increment(void* arg){
-    int *n = (int*)arg; 
-    pthread_t thread = pthread_self();
+    int thread = *(int*)arg; 
     for(int i = 0; i < MAX_INCREMENTS; i++){
-        (*n)++;
+        number++;
     }
-    printf("Thread %lu terminato, valore di n: %d\n", thread, *n);
+    printf("Thread %d terminated, value of number: %d\n", thread, number);
     pthread_exit(NULL);
 }
 
 void* thread_increment_mutex(void* arg){
     pthread_mutex_lock(&lock);
-    int *n = (int*)arg; 
-    pthread_t thread = pthread_self();
+    int thread = *(int*)arg; 
     for(int i = 0; i < MAX_INCREMENTS; i++){
-        (*n)++;
+        number++;
     }
-    printf("Thread %lu terminato, valore di n: %d\n", thread, *n);
+    printf("Thread %d terminated, value of number: %d\n", thread, number);
     pthread_mutex_unlock(&lock);
     pthread_exit(NULL);
 }
