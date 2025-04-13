@@ -9,7 +9,7 @@ extern int number;
 int main(){
     pthread_t threads[MAX_THREAD];
 
-    printf("Numero prima dell' incremento: %d\n", number);
+    printf("Number before increment: %d\n", number);
 
     for(int i = 0; i < MAX_THREAD; i++){
         pthread_create(&threads[i], NULL, thread_increment, &number);
@@ -19,7 +19,7 @@ int main(){
         pthread_join(threads[i], NULL);
     }
 
-    printf("Numero dopo incremento: %d\n", number);
+    printf("Number after increment: %d\n", number);
     
     return 0;
 }
